@@ -34,3 +34,70 @@ score_msg_size = score_font.size("Score")
 background_color = pygame.Color(0,0,0)    # we will fill background color as black
 black = pygame.Color(0,0,0)
 
+#for clock at the left corner
+gameClock = pygame.time.Clock()
+
+def  checkCollision(posA,As,posB,Bs):
+    if(posA.x < posB.x + Bs and posA.x+As > posB.x and posA.y < posB.y+Bs and posA.y+As > posB.y):
+        return True
+    return False    
+
+#define keys
+def getKey():
+    for event in pygame.event.get():
+        if event.type = pygame.KEYDOWN:
+            if event.key == pygame.K_up:
+                return KEY["UP"]
+            elif event.key == pygame.K_DOWN: 
+                return KEY["DOWN"]
+            elif event.key == pygame.K_RIGHT:
+                return KEY["RIGHT"]
+            #for exit
+            elif event.key == pygame.K_ESCAPE:
+                return "exit"
+            elif event.key == pygame.K_y:
+                return "yes" 
+            #if we ont want to play game
+            elif event.key == pygame.K_n:
+                return "no"
+        if event.type == pygame.QUIT:
+            sys.exit(0)
+
+def endGame():
+    message = game_over_font.render("Gsme Over",1,pygame.Color("white"))
+    message_play_again = play_again_font.render("Play Again ? (Y/N)",1,pygame.Color("green"))
+    screen.blit(message,(320,240))
+    screen.blit(message_play_again,(320+12,240+40))
+
+    pygame.display.flip()
+    pygame.display.update()
+
+    mkey = getKey()
+    while(mkey != "exit"):
+        if(mkey == "yes"):
+            main()
+        elif(mkey == "no"):
+            break
+        mkey = getKey()
+        gameClock.tick(FPS)
+    sys.exit(0) 
+
+def drawScore(score):
+    score_numb = score_numb_font.render(str(score),1,pygame.Color("red"))
+    screen.blit(score_msg,(SCREEN_HEIGHT - score_msg_size[0]-60,10))
+    screen.blit(score_numb,(SCREEN_WIDTH-45,14))
+
+
+def drawGameTime(gameTime):
+    game_time = score_font.render("Time: ",1,pygame.Color("white"))
+    game_time_numb = score_numb_font.render(str(gameTime/1000),1,pygame.Color("white"))
+    screen.blit(game_time_numb,(105,14))
+
+
+def exitScreen():
+    pass        
+def main():
+    score= 0                                        
+
+
+
