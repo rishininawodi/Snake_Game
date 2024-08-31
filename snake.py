@@ -41,7 +41,35 @@ def  checkCollision(posA,As,posB,Bs):
     if(posA.x < posB.x + Bs and posA.x+As > posB.x and posA.y < posB.y+Bs and posA.y+As > posB.y):
         return True
     return False    
+# check boundaries  here we are not limiting bundaries like it can pass through screen and come from other
+def checkLimits(snake):
+    if(snake.x > SCREEN_WIDTH):
+        snake.x = SNAKE_SIZE
+    if(snake.x <0):#checkeed wwhe n some part of snake is on other side and some on opposite side.
+        snake.x = SCREEN_WIDTH - SNAKE_SIZE  
+    if(snake.y > SCREEN_HEIGHT):
+        snake.y = SNAKE_SIZE 
+    if(snake.y <0):#also same half half
+        snake.y -SCREEN_HEIGHT -SNAKE_SIZE      
 
+class Apple:
+    def __init__(self,x,y,store):
+        self.x = x
+        self.y = Y
+        self.state = state
+        self.color = pygame.color.Color("red") #color of food
+
+
+    def draw(self,screen:
+        pygame.draw.rect(screen,self.color,(self.x,self.y,APPLE_SIZE,APPLE_SIZE),0))    
+
+class segment:
+    self.x = x
+    self.y = y
+    self.direction = KEY["UP"]
+    self.color = "white"
+
+    
 #define keys
 def getKey():
     for event in pygame.event.get():
