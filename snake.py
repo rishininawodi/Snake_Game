@@ -1,23 +1,25 @@
+
+import random
 import pygame
 import sys
 import os
-import random 
+ 
 import math
 
 pygame.init()
 pygame.display.set_caption("snake game")
 pygame.font.init()
-random.speed()
+random.seed()
 
 #declare global constatnt definition
-speed = 0.30
+SPEED = 0.36
 SNAKE_SIZE = 9
-APPLE_SIZE = SNAKE_SIZE
-SEPERATION =10
+APPLE_SIZE = SNAKE_SIZE     # we will keep both food and size of snake same
+SEPARATION = 10    # separation between two pixels
 SCREEN_HEIGHT = 600
-SCREEN_WIDTH= 800
+SCREEN_WIDTH = 800
 FPS = 25
-KEY = {"UP":1 ,"DOM":2 , "LEFT":3 ,"RIGHT":4}
+KEY = {"UP":1 , "DOWN":2 , "LEFT":3, "RIGHT":4}
 
 #initiallize screen
 screen = pygame.display.set_mode((SCREEN_HEIGHT,SCREEN_HEIGHT),pygame.HWSURFACE)
@@ -53,22 +55,22 @@ def checkLimits(snake):
         snake.y -SCREEN_HEIGHT -SNAKE_SIZE      
 
 class Apple:
-    def __init__(self,x,y,store):
+    def __init__(self,x,y,state):
         self.x = x
-        self.y = Y
+        self.y = y
         self.state = state
         self.color = pygame.color.Color("red") #color of food
 
 
-    def draw(self,screen:
-        pygame.draw.rect(screen,self.color,(self.x,self.y,APPLE_SIZE,APPLE_SIZE),0))    
+    def draw(self,screen):
+        pygame.draw.rect(screen,self.color,(self.x,self.y,APPLE_SIZE,APPLE_SIZE),0)   
 
 class segment:
     def __init__(self,x,y):
-    self.x = x
-    self.y = y
-    self.direction = KEY["UP"]
-    self.color = "white"
+        self.x = x
+        self.y = y
+        self.direction = KEY["UP"]
+        self.color = "white"
 
 class snake:
     def __init__(self,x,y):
@@ -192,23 +194,27 @@ class snake:
 #define keys
 def getKey():
     for event in pygame.event.get():
-        if event.type = pygame.KEYDOWN:
-            if event.key == pygame.K_up:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
                 return KEY["UP"]
-            elif event.key == pygame.K_DOWN: 
+            elif event.key == pygame.K_DOWN:
                 return KEY["DOWN"]
+            elif event.key == pygame.K_LEFT:
+                return KEY["LEFT"]
             elif event.key == pygame.K_RIGHT:
                 return KEY["RIGHT"]
-            #for exit
+            # for exit 
             elif event.key == pygame.K_ESCAPE:
                 return "exit"
+            # if we want to continue playing again
             elif event.key == pygame.K_y:
-                return "yes" 
-            #if we ont want to play game
+                return "yes"
+            # if we don't want to play game
             elif event.key == pygame.K_n:
                 return "no"
         if event.type == pygame.QUIT:
             sys.exit(0)
+
 
 def endGame():
     message = game_over_font.render("Gsme Over",1,pygame.Color("white"))
