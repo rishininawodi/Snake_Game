@@ -64,6 +64,7 @@ class Apple:
         pygame.draw.rect(screen,self.color,(self.x,self.y,APPLE_SIZE,APPLE_SIZE),0))    
 
 class segment:
+    def __init__(self,x,y):
     self.x = x
     self.y = y
     self.direction = KEY["UP"]
