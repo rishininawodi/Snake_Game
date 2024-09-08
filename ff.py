@@ -32,7 +32,7 @@ score_font = pygame.font.Font(None,38)
 score_numb_font = pygame.font.Font(None,28)
 game_over_font = pygame.font.Font(None,46)
 play_again_font = score_numb_font
-score_msg = score_font.render("Score : ",1,pygame.Color("pink"))
+score_msg = score_font.render("Score : ",1,pygame.Color("green"))
 score_msg_size = score_font.size("Score")
 background_color = pygame.Color(0,0,0)    # we will fill background color as black
 black = pygame.Color(0,0,0)
@@ -65,7 +65,7 @@ class Apple:
         self.x = x
         self.y = y
         self.state = state
-        self.color = pygame.color.Color("green")     # color of food
+        self.color = pygame.color.Color("orange")     # color of food
 
     def draw(self,screen):
         pygame.draw.rect(screen,self.color,(self.x,self.y,APPLE_SIZE,APPLE_SIZE),0)
@@ -191,7 +191,7 @@ class snake:
             if(self.stack[counter].color == "NULL"):
                 counter +=1
                 continue
-            pygame.draw.rect(screen , pygame.color.Color("red"), (self.stack[counter].x,
+            pygame.draw.rect(screen , pygame.color.Color("yellow"), (self.stack[counter].x,
                 self.stack[counter].y, SNAKE_SIZE , SNAKE_SIZE),0)
             counter +=1
 
@@ -241,7 +241,7 @@ def endGame():
     sys.exit(0)
 
 def drawScore(score):
-    score_numb = score_numb_font.render(str(score),1,pygame.Color("brown"))
+    score_numb = score_numb_font.render(str(score),1,pygame.Color("red"))
     screen.blit(score_msg, (SCREEN_WIDTH - score_msg_size[0]-60,10))
     screen.blit(score_numb,(SCREEN_WIDTH - 45,14))
 
