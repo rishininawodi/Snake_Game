@@ -238,11 +238,42 @@ def drawScore(score):
 def drawGameTime(gameTime):
     game_time = score_font.render("Time: ",1,pygame.Color("white"))
     game_time_numb = score_numb_font.render(str(gameTime/1000),1,pygame.Color("white"))
+    screen.blit(game_time,(30,10))
     screen.blit(game_time_numb,(105,14))
 
 
 def exitScreen():
-    pass        
+    pass    
+
+def respawnApple(apples , index , sx , sy):
+    radius = math.sqrt((SCREEN_WIDTH/2*SCREEN_WIDTH/2 + SCREEN_HEIGHT/2*SCREEN_HEIGHT/2))/2
+    angle = 999
+    while(angle > radius):
+        angle = random.uniform(0,800)*math.pi*2
+        x = SCREEN_WIDTH/2 + radius * math.cos(angle)
+        y = SCREEN_HEIGHT/2 + radius * math.sin(angle)
+        if(x == sx and y == sy):
+            continue
+    newApple = Apple(x , y ,1)
+    apples[index] = newApple
+
+def respawnApples(apples , quantity , sx ,sy):
+    counter = 0
+    del apples[:]
+    radius = math.sqrt((SCREEN_WIDTH/2*SCREEN_WIDTH/2 + SCREEN_HEIGHT/2*SCREEN_HEIGHT/2))/2
+    angle = 999
+    while(counter < quantity):
+        while(angle > radius):
+            angle = random.uniform(0,800) * math.pi*2
+            x = SCREEN_WIDTH/2 + radius * math.cos(angle)
+            y = SCREEN_HEIGHT/2 + radius * math.sin(angle)
+            if((x-APPLE_SIZE == sx or x+APPLE_SIZE == sx) and (y-APPLE_SIZE == sy or y+APPLE_SIZE == sy) 
+                    or radius - angle <= 10): 
+                    continue
+        apples.append(Apple(x,y,1))
+        angle = 999
+        counter +=1
+
 def main():
     score= 0                                        
 
